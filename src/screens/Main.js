@@ -21,7 +21,7 @@ const Main = () => {
         const interval = setInterval(() => {  //actualise crypto            
             //console.log("refresh");
             getBitcoin();
-        }, 150000);  //Actualisation every 15sec
+        }, 15000);  //Actualisation every 15sec
         return () => clearInterval(interval);
     }, []);
 

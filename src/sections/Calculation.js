@@ -6,25 +6,26 @@ const Calculation = ({ currFocused, euroBTC }) => {
     const [amount, setAmount] = useState(null)
     const [result, setResult] = useState(null)
     return (
-        <View style={styles.section}>
-            <Text style={[styles.simpleText, styles.simpleText]}>Choose the currency above and calculate your invest</Text>
+        <View className={"flex-col justify-center items-center"}>
+            <Text className={"text-white"}>Choose the currency above and calculate your invest</Text>
 
-            <View style={styles.line}>
-                <Text style={[styles.simpleText, styles.curr]}>{currFocused?.id}</Text>
+            <View className={"flex-row justify-center m-3"}>
+                <Text className={"text-3xl font-medium mx-3 text-white"}>{currFocused?.id}</Text>
                 <TextInput
                     style={styles.input}
+                    className={"mx-3 items-center w-40 h-10 rounded-md bg-gray-900 text-slate-400"}
                     onChangeText={setAmount}
                     value={amount}
                     placeholder="ex: 2250.5"
                     placeholderTextColor="#444444"
                     keyboardType="numeric"
                 />
-                <TouchableHighlight style={styles.button} onPress={() => setResult(calcInBTC(amount, currFocused.rate, euroBTC))}>
-                    <Text style={styles.textBtn}>💱</Text>
+                <TouchableHighlight className={"mx-3 items-center w-20 h-10 rounded-md bg-slate-200 "} style={styles.button} onPress={() => setResult(calcInBTC(amount, currFocused.rate, euroBTC))}>
+                    <Text className={"text-3xl"}>💱</Text>
                 </TouchableHighlight>
 
             </View>
-            {result && <Text style={[styles.simpleText, styles.result]}>{result} <Text style={{ color: "#ae9173" }}>₿itcoin</Text> </Text>}
+            {result && <Text className={"text-xl font-extrabold text-white"}>{result} <Text className={"text-amber-600"}>₿itcoin</Text> </Text>}
         </View>
     )
 }
@@ -32,26 +33,8 @@ const Calculation = ({ currFocused, euroBTC }) => {
 export default Calculation
 
 const styles = StyleSheet.create({
-    section: {
-        flexDirection: "column",
-        justifyContent: 'center',
-        alignItems: "center"
-    },
-    line: {
-        flexDirection: "row",
-        justifyContent: 'center',
-        margin: 10
-    },
-    button: {
-        marginHorizontal: 10,
-        alignItems: 'center',
-        width: 75,
-        height: 40,
+    button: {       // shadow doesnt work on nativewind
         borderRadius: 5,
-
-        backgroundColor: '#BBBBBBBB',
-
-        backgroundColor: '#000000',
         shadowColor: '#fff',
         shadowOffset: { width: 0, height: 8 },
         shadowOpacity: 0.4,
@@ -62,25 +45,11 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
     input: {
-        borderRadius: 5,
-        height: 40,
-        width: 150,
-        paddingHorizontal: 5,
-        color: "#aaa",
-        backgroundColor: '#222222',
         shadowColor: '#fff',
         shadowOffset: { width: 0, height: 8 },
         shadowOpacity: 0.4,
         shadowRadius: 3,
         elevation: 8,
-    },
-    simpleText: {
-        color: "#FFF"
-    },
-    curr: {
-        fontSize: 30,
-        marginHorizontal: 10,
-        fontWeight: "500",
     },
     result: {
         fontSize: 20,

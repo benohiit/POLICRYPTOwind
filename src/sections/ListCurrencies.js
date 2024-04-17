@@ -20,16 +20,17 @@ const ListCurrencies = (props) => {
                 currencyFocused.current.rate = item.rate;
                 props.handleCurrencyFocus(currencyFocused.current.id, currencyFocused.current.rate);
             }} >
-                <View style={[styles.item, currencyFocused.current.id == item.id && { backgroundColor: "rgba(255, 163, 163, 0.5)" }]}>
-                    <View style={styles.flagBox}>
-                        <Image style={styles.flag}
+                <View className={`flex-row justify-center m-1/2 ${currencyFocused.current.id == item.id && 'bg-bg-red/2'}`}>
+                    <View className={"w-1/12 items-center"}>
+                        <Image
+                            className={"w-8 h-5"}
                             source={{
                                 uri: item.flag,
                             }}
                         />
                     </View>
-                    <Text style={[styles.simpleText, styles.curr]}>{item.id}</Text>
-                    <Text style={[styles.simpleText, styles.currName]}>{item.currency_name}</Text>
+                    <Text className={"text-base font-medium w-1/10 items-center text-white mx-1"}>{item.id}</Text>
+                    <Text className={"text-xs items-center w-5/12 text-white"}>{item.currency_name}</Text>
                     {/*<Text style={styles.price}>{calculRateToRender(item.id, item.rate, formatToDecimals(props.euroBTC))}</Text>
                     just sometimes makes the fatal error: 
                     -> RangeError: TaskQueue: Error with task : com.facebook.hermes.intl.JSRangeErrorException: Malformed currency code !
@@ -37,7 +38,7 @@ const ListCurrencies = (props) => {
                     But with the FormattedNumber from react-intl under, it does the same but handle the error as a log that I ignore, then its working fine, I know it's not the best process against log errors :p
                     I need to dive deeper to see what would be the best to show the currency properly without any error logs
                     */}
-                    <Text style={[styles.simpleText, styles.price]}>
+                    <Text className={"text-white font-medium items-start w-5/12"}>
                         <IntlProvider locale='fr'>
                             <FormattedNumber
                                 value={item.rate * formatToDecimals(props.euroBTC)}
@@ -53,7 +54,7 @@ const ListCurrencies = (props) => {
     };
 
     return (
-        <View style={styles.section}>
+        <View className={"self-center max-h-72 bg-bg-black/5"}>
             <FlatList
                 data={DATA}
                 renderItem={renderItem}
@@ -64,47 +65,3 @@ const ListCurrencies = (props) => {
 }
 
 export default ListCurrencies
-
-const styles = StyleSheet.create({
-    section: {
-        maxHeight: 300,
-        backgroundColor: "rgba(255,255,255,0.2)",
-        alignSelf: "center",
-        marginRight: 10,
-        marginLeft: 10,
-    },
-    item: {
-        flexDirection: "row",
-        justifyContent: 'flex-start',
-        margin: 2
-    },
-    curr: {
-        fontSize: 15,
-        fontWeight: "500",
-        width: "10%",
-        alignItems: "center"
-    },
-    currName: {
-        fontSize: 12,
-        width: "40%",
-        alignItems: "center"
-    },
-    price: {
-        width: "40%",
-        alignItems: "center",
-        fontWeight: "500",
-    },
-    flagBox: {
-        width: "10%",
-        alignItems: "center"
-    },
-    flag: {
-        height: 20,
-        width: 30,
-        resizeMode: "stretch",
-    },
-    simpleText: {
-        color: "#FFF"
-    }
-
-})

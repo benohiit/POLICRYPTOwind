@@ -1,63 +1,37 @@
 import { StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native'
 import React from 'react'
 import RateString from '../components/ui/RateString'
+import Title from '../components/ui/Title'
 
 const CurrentRate = (props) => {
     return (
         <>
-            <View style={styles.section}>
-                <View style={styles.asideLeft}>
+            <View className={"flex-row justify-center h-52"}/* style={styles.section} */>
+                <View className={"w-1/2"}>
                     <Image
-                        style={styles.logoBitcoin}
+                        className={"absolute right-10 h-60 w-60"}
                         source={require('../assets/img/bitcoin.png')}
                     />
                 </View>
-                <View style={styles.asideRight}>
-                    {
-                        props.isLoading ? <ActivityIndicator size={"large"} /> :
-                            <>
-
-                                <RateString curr={"eur"} amount={props.rates.eur} />
-                                <RateString curr={"usd"} amount={props.rates.usd} />
-                                <RateString curr={"gbp"} amount={props.rates.gbp} />
-                            </>
-                    }
+                <View className={"w-1/2"}>
+                    <Title title={"POLICRYPTO"} size={"4xl"} />
+                    <View className={"mt-7"}>
+                        {
+                            props.isLoading ? <ActivityIndicator size={"large"} /> :
+                                <>
+                                    <RateString curr={"eur"} amount={props.rates.eur} />
+                                    <RateString curr={"usd"} amount={props.rates.usd} />
+                                    <RateString curr={"gbp"} amount={props.rates.gbp} />
+                                </>
+                        }
+                    </View>
                 </View>
             </View>
-            <View style={styles.bottomLine}>
-                <Text style={styles.simpleText}> last update: {props.rates.timeStamp}</Text>
+            <View className={"self-end mr-5 mb-5"}>
+                <Text className={"text-white justify-end"}> last update: {props.rates.timeStamp}</Text>
             </View>
         </>
     )
 }
 
 export default CurrentRate
-
-const styles = StyleSheet.create({
-    section: {
-        flexDirection: "row",
-        justifyContent: 'center',
-    },
-    asideRight: {
-        width: '60%',
-        alignSelf: "center",
-        flexDirection: "column",
-        justifyContent: 'center',
-        color: "#FFF"
-    },
-    asideLeft: {
-        width: '40%',
-    },
-    logoBitcoin: {
-        alignSelf: "center",
-        height: 100,
-        width: 100,
-        resizeMode: "stretch",
-    },
-    bottomLine: {
-        alignSelf: "center",
-    },
-    simpleText: {
-        color: "#FFF"
-    }
-})

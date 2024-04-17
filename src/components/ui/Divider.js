@@ -3,14 +3,15 @@ import React from 'react'
 
 const Divider = () => {
     return (
-        <View style={styles.line}>
+        <View classname={"h-5"}>
+            {/* not working with nativewind ? */}
         </View>
     )
 }
 
 export default Divider
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
     line: {
         width: "90%",
         margin: 10,
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
         borderBottomColor: "#515151",
         alignSelf: "center"
     }
-})
+}) */

@@ -1,4 +1,4 @@
-//import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import Calculation from '../sections/Calculation'
 import CurrentRate from '../sections/CurrentRate'
@@ -21,7 +21,7 @@ const Main = () => {
         const interval = setInterval(() => {  //actualise crypto            
             //console.log("refresh");
             getBitcoin();
-        }, 15000);  //Actualisation every 15sec
+        }, 150000);  //Actualisation every 15sec
         return () => clearInterval(interval);
     }, []);
 
@@ -30,7 +30,6 @@ const Main = () => {
         // the fetch here for the children
         <>
             <CurrentRate rates={{ timeStamp: timeStamp, eur: EUR, usd: USD, gbp: GBP }} isLoading={isLoadingBTC} />
-            <Divider />
 
             {
                 isLoadingCurr || !responseCurr || !EUR ?
@@ -38,7 +37,7 @@ const Main = () => {
                     :
                     <ListCurrencies euroBTC={EUR} allCurr={responseCurr} /* forwardedRef={currencyFocused}  */ handleCurrencyFocus={handleCurrencyFocus} />
             }
-            <Divider />
+
             <Calculation currFocused={focus} euroBTC={EUR} />
         </>
     )

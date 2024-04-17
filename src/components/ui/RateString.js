@@ -3,7 +3,7 @@ import React from 'react'
 import { formatToEuroString } from '../../utils/functions';
 const RateString = ({ curr, amount }) => {
     return (
-        <Text style={styles.amount}>{amount && formatToEuroString(amount)} {curr === "eur" ? "€" : (curr === "usd" ? "$" : "£")}</Text>
+        <Text className={"self-start font-semibold text-white text-2xl"}>{amount && formatToEuroString(amount)} {curr === "eur" ? "€" : (curr === "usd" ? "$" : "£")}</Text>
     )
 }
 
